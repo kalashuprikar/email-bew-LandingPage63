@@ -74,6 +74,11 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
   const ref = React.useRef<HTMLDivElement>(null);
   drag(drop(ref));
 
+  // Sync local state with parent selection
+  React.useEffect(() => {
+    setIsBlockSelected(isSelected);
+  }, [isSelected]);
+
   return (
     <div
       ref={ref}
@@ -88,7 +93,8 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
       onMouseLeave={() => setIsHovering(false)}
       onClick={(e) => {
         e.stopPropagation();
-        setIsBlockSelected(!isBlockSelected);
+        onBlockSelect(block.id);
+        setIsBlockSelected(true);
       }}
     >
       <BlockRenderer
