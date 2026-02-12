@@ -21,6 +21,7 @@ import { SplitImageCardBlockComponent } from "./blocks/SplitImageCardBlockCompon
 import { TwoColumnCardBlockComponent } from "./blocks/TwoColumnCardBlockComponent";
 import { StatsBlockComponent } from "./blocks/StatsBlockComponent";
 import { FeaturesBlockComponent } from "./blocks/FeaturesBlockComponent";
+import { PromoBlockComponent } from "./blocks/PromoBlockComponent";
 
 interface BlockRendererProps {
   block: ContentBlock;
@@ -263,6 +264,20 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
             block={block as any}
             isSelected={isSelected}
             onUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
+          />
+        </div>
+      );
+    case "promo":
+      return (
+        <div onClick={handleClick}>
+          <PromoBlockComponent
+            block={block as any}
+            isSelected={isSelected}
+            onBlockUpdate={onBlockUpdate}
+            onAddBlock={onAddBlock}
+            onDuplicate={onDuplicate}
+            onDelete={onDelete}
+            blockIndex={blockIndex}
           />
         </div>
       );

@@ -38,6 +38,7 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
   onDuplicate,
   onDelete,
 }) => {
+  const [isHovering, setIsHovering] = React.useState(false);
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "canvas-block",
@@ -76,6 +77,8 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
         isDragging && "opacity-50 scale-95 transition-all",
         isOver && "ring-2 ring-valasys-orange rounded-lg",
       )}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
     >
       <BlockRenderer
         block={block}
@@ -92,8 +95,8 @@ export const DraggableBlock: React.FC<DraggableBlockProps> = ({
         blockIndex={index}
       />
 
-      {isSelected && (
-        <div className="relative z-50 px-4 py-3 bg-gray-50 border-t border-gray-200">
+      {(isSelected || isHovering) && (
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 z-[100] transition-all">
           <BlockActions
             block={block}
             blockIndex={index}

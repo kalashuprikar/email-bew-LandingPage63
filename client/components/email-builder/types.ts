@@ -16,7 +16,8 @@ export type BlockType =
   | "splitImageCard"
   | "twoColumnCard"
   | "stats"
-  | "features";
+  | "features"
+  | "promo";
 
 export interface TitleBlock {
   type: "title";
@@ -443,6 +444,8 @@ export interface StatsBlock {
     id: string;
     value: string;
     label: string;
+    values?: { id: string; content: string }[];
+    labels?: { id: string; content: string }[];
     fontSize: number;
     labelFontSize: number;
     textColor: string;
@@ -461,6 +464,9 @@ export interface FeaturesBlock {
     icon: string;
     title: string;
     description: string;
+    icons?: { id: string; content: string }[];
+    titles?: { id: string; content: string }[];
+    descriptions?: { id: string; content: string }[];
     fontSize: number;
     titleFontSize: number;
     textColor: string;
@@ -471,6 +477,31 @@ export interface FeaturesBlock {
   width: number;
   widthUnit: "px" | "%";
   columnsCount: number;
+  visibility: "all" | "desktop" | "mobile";
+}
+
+export interface PromoBlock {
+  type: "promo";
+  id: string;
+  promoTexts?: { id: string; content: string }[];
+  promoCodes?: { id: string; content: string }[];
+  promoText: string; // Legacy support
+  promoCode: string; // Legacy support
+  fontSize: number;
+  promoCodeFontSize: number;
+  fontColor: string;
+  promoCodeColor: string;
+  backgroundColor: string;
+  alignment: "left" | "center" | "right";
+  fontWeight: "normal" | "bold";
+  letterSpacing: number;
+  width: number;
+  widthUnit: "px" | "%";
+  padding: number;
+  margin: number;
+  borderWidth: number;
+  borderColor: string;
+  borderRadius: number;
   visibility: "all" | "desktop" | "mobile";
 }
 
@@ -495,7 +526,8 @@ export type ContentBlock =
   | SplitImageCardBlock
   | TwoColumnCardBlock
   | StatsBlock
-  | FeaturesBlock;
+  | FeaturesBlock
+  | PromoBlock;
 
 export interface EmailTemplate {
   id: string;

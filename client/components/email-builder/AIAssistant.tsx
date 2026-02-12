@@ -18,7 +18,8 @@ import {
   createFooterWithSocialBlock,
   createStatsBlock,
   createFeaturesBlock,
-  createTwoColumnCardBlock
+  createTwoColumnCardBlock,
+  createPromoBlock
 } from "./utils";
 
 interface AIAssistantProps {
@@ -92,6 +93,8 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
           return { ...createFeaturesBlock(), ...block, id };
         case "twoColumnCard":
           return { ...createTwoColumnCardBlock(), ...block, id };
+        case "promo":
+          return { ...createPromoBlock(), ...block, id };
         default:
           return { ...block, id };
       }

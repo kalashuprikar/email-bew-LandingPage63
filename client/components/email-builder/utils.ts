@@ -19,6 +19,7 @@ import {
   SpacerBlock,
   CenteredImageCardBlock,
   SplitImageCardBlock,
+  PromoBlock,
 } from "./types";
 import { compileHTML, sanitizeHTML } from "./htmlCompiler";
 
@@ -584,21 +585,31 @@ export function createTwoColumnCardBlock() {
   };
 }
 
-export function createPromoBlock(): HtmlBlock {
+export function createPromoBlock(): PromoBlock {
+  const promoTextId = generateId();
+  const promoCodeId = generateId();
   return {
-    type: "html",
+    type: "promo",
     id: generateId(),
-    content: `<div style="background-color: #f9f9f9; padding: 40px 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
-      <p style="margin: 0 0 12px 0; font-size: 16px; color: #666;">Save 15% on your next order!</p>
-      <h2 style="margin: 0; font-size: 36px; font-weight: bold; color: #000; letter-spacing: 2px;">PROMO15</h2>
-    </div>`,
+    promoTexts: [{ id: promoTextId, content: "Save 15% on your next order!" }],
+    promoCodes: [{ id: promoCodeId, content: "PROMO15" }],
+    promoText: "Save 15% on your next order!",
+    promoCode: "PROMO15",
+    fontSize: 16,
+    promoCodeFontSize: 36,
+    fontColor: "#666666",
+    promoCodeColor: "#000000",
+    backgroundColor: "#f9f9f9",
+    alignment: "center",
+    fontWeight: "bold",
+    letterSpacing: 2,
     width: 100,
     widthUnit: "%",
-    padding: 0,
-    margin: 0,
+    padding: 40,
+    margin: 20,
     borderWidth: 0,
     borderColor: "#000000",
-    borderRadius: 0,
+    borderRadius: 8,
     visibility: "all",
   };
 }
@@ -612,6 +623,8 @@ export function createStatsBlock() {
         id: generateId(),
         value: "4.8",
         label: "Average rating",
+        values: [{ id: generateId(), content: "4.8" }],
+        labels: [{ id: generateId(), content: "Average rating" }],
         fontSize: 28,
         labelFontSize: 14,
         textColor: "#000000",
@@ -621,6 +634,8 @@ export function createStatsBlock() {
         id: generateId(),
         value: "120",
         label: "Reviews",
+        values: [{ id: generateId(), content: "120" }],
+        labels: [{ id: generateId(), content: "Reviews" }],
         fontSize: 28,
         labelFontSize: 14,
         textColor: "#000000",
@@ -630,6 +645,8 @@ export function createStatsBlock() {
         id: generateId(),
         value: "200K",
         label: "Downloads",
+        values: [{ id: generateId(), content: "200K" }],
+        labels: [{ id: generateId(), content: "Downloads" }],
         fontSize: 28,
         labelFontSize: 14,
         textColor: "#000000",
@@ -652,6 +669,14 @@ export function createFeaturesBlock() {
         icon: "❤️",
         title: "Feature One",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        icons: [{ id: generateId(), content: "❤️" }],
+        titles: [{ id: generateId(), content: "Feature One" }],
+        descriptions: [
+          {
+            id: generateId(),
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          },
+        ],
         fontSize: 14,
         titleFontSize: 16,
         textColor: "#000000",
@@ -664,6 +689,14 @@ export function createFeaturesBlock() {
         icon: "🎁",
         title: "Feature Two",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        icons: [{ id: generateId(), content: "🎁" }],
+        titles: [{ id: generateId(), content: "Feature Two" }],
+        descriptions: [
+          {
+            id: generateId(),
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          },
+        ],
         fontSize: 14,
         titleFontSize: 16,
         textColor: "#000000",
@@ -676,6 +709,14 @@ export function createFeaturesBlock() {
         icon: "ℹ️",
         title: "Feature Three",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        icons: [{ id: generateId(), content: "ℹ️" }],
+        titles: [{ id: generateId(), content: "Feature Three" }],
+        descriptions: [
+          {
+            id: generateId(),
+            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          },
+        ],
         fontSize: 14,
         titleFontSize: 16,
         textColor: "#000000",
@@ -903,6 +944,43 @@ export function renderBlockToHTML(block: ContentBlock): string {
       const compiled = compileHTML(sanitized);
       return `<div style="width: ${htmlBlock.width}${htmlBlock.widthUnit}; padding: ${htmlBlock.padding}px; margin: ${htmlBlock.margin}px;">${compiled}</div>`;
     }
+    case "promo": {
+      const promoBlock = block as PromoBlock;
+      const width = `${promoBlock.width}${promoBlock.widthUnit}`;
+      const borderStyle =
+        promoBlock.borderWidth > 0
+          ? `border: ${promoBlock.borderWidth}px solid ${promoBlock.borderColor};`
+          : "";
+
+      const texts =
+        promoBlock.promoTexts ||
+        (promoBlock.promoText
+          ? [{ id: "text-0", content: promoBlock.promoText }]
+          : []);
+      const codes =
+        promoBlock.promoCodes ||
+        (promoBlock.promoCode
+          ? [{ id: "code-0", content: promoBlock.promoCode }]
+          : []);
+
+      const textsHtml = texts
+        .map(
+          (t) =>
+            `<p style="margin: 0 0 12px 0; font-size: ${promoBlock.fontSize}px; color: ${promoBlock.fontColor};">${t.content}</p>`,
+        )
+        .join("");
+      const codesHtml = codes
+        .map(
+          (c) =>
+            `<h2 style="margin: 0; font-size: ${promoBlock.promoCodeFontSize}px; font-weight: ${promoBlock.fontWeight}; color: ${promoBlock.promoCodeColor}; letter-spacing: ${promoBlock.letterSpacing}px;">${c.content}</h2>`,
+        )
+        .join("");
+
+      return `<div style="background-color: ${promoBlock.backgroundColor}; padding: ${promoBlock.padding}px; text-align: ${promoBlock.alignment}; border-radius: ${promoBlock.borderRadius}px; margin: ${promoBlock.margin}px auto; width: ${width}; ${borderStyle}">
+        ${textsHtml}
+        ${codesHtml}
+      </div>`;
+    }
     case "twoColumnCard": {
       const twoColBlock = block as any;
       const width = `${twoColBlock.width}${twoColBlock.widthUnit}`;
@@ -960,9 +1038,30 @@ export function renderBlockToHTML(block: ContentBlock): string {
             index !== statsBlock.stats.length - 1
               ? "border-right: 1px solid #e0e0e0;"
               : "";
+
+          const values =
+            stat.values ||
+            (stat.value ? [{ id: "val-0", content: stat.value }] : []);
+          const labels =
+            stat.labels ||
+            (stat.label ? [{ id: "lab-0", content: stat.label }] : []);
+
+          const valuesHtml = values
+            .map(
+              (v: any) =>
+                `<h3 style="margin: 0 0 8px 0; font-size: ${stat.fontSize}px; font-weight: bold; color: ${stat.textColor};">${v.content}</h3>`,
+            )
+            .join("");
+          const labelsHtml = labels
+            .map(
+              (l: any) =>
+                `<p style="margin: 0; font-size: ${stat.labelFontSize}px; color: #666;">${l.content}</p>`,
+            )
+            .join("");
+
           return `<div style="width: 33%; display: inline-block; vertical-align: top; text-align: center; padding: ${stat.padding}px; box-sizing: border-box; ${borderStyle}">
-              <h3 style="margin: 0 0 8px 0; font-size: ${stat.fontSize}px; font-weight: bold; color: ${stat.textColor};">${stat.value}</h3>
-              <p style="margin: 0; font-size: ${stat.labelFontSize}px; color: #666;">${stat.label}</p>
+              ${valuesHtml}
+              ${labelsHtml}
             </div>`;
         })
         .join("");
@@ -973,11 +1072,42 @@ export function renderBlockToHTML(block: ContentBlock): string {
       const width = `${featuresBlock.width}${featuresBlock.widthUnit}`;
       const featuresHtml = featuresBlock.features
         ?.map((feature: any) => {
+          const icons =
+            feature.icons ||
+            (feature.icon ? [{ id: "icon-0", content: feature.icon }] : []);
+          const titles =
+            feature.titles ||
+            (feature.title ? [{ id: "title-0", content: feature.title }] : []);
+          const descriptions =
+            feature.descriptions ||
+            (feature.description
+              ? [{ id: "desc-0", content: feature.description }]
+              : []);
+
+          const iconsHtml = icons
+            .map(
+              (i: any) =>
+                `<div style="font-size: 32px; margin-bottom: 12px; line-height: 1;">${i.content}</div>`,
+            )
+            .join("");
+          const titlesHtml = titles
+            .map(
+              (t: any) =>
+                `<h3 style="margin: 0 0 8px 0; font-size: ${feature.titleFontSize}px; font-weight: bold; color: ${feature.textColor};">${t.content}</h3>`,
+            )
+            .join("");
+          const descriptionsHtml = descriptions
+            .map(
+              (d: any) =>
+                `<p style="margin: 0; font-size: ${feature.fontSize}px; color: ${feature.textColor}; line-height: 1.5;">${d.content}</p>`,
+            )
+            .join("");
+
           return `<div style="flex: 1; min-width: 0; text-align: center; padding: 0 10px; box-sizing: border-box;">
               <div style="background-color: ${feature.backgroundColor}; border-radius: ${feature.borderRadius}px; padding: ${feature.padding}px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: 100%;">
-                <div style="font-size: 32px; margin-bottom: 12px; line-height: 1;">${feature.icon}</div>
-                <h3 style="margin: 0 0 8px 0; font-size: ${feature.titleFontSize}px; font-weight: bold; color: ${feature.textColor};">${feature.title}</h3>
-                <p style="margin: 0; font-size: ${feature.fontSize}px; color: ${feature.textColor}; line-height: 1.5;">${feature.description}</p>
+                ${iconsHtml}
+                ${titlesHtml}
+                ${descriptionsHtml}
               </div>
             </div>`;
         })

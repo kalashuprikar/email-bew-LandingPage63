@@ -7304,6 +7304,159 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           </div>
         );
       }
+      case "promo":
+        return (
+          <div className="space-y-5">
+            <div>
+              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                Promotion Text
+              </Label>
+              <textarea
+                value={block.promoText}
+                onChange={(e) =>
+                  onBlockUpdate({ ...block, promoText: e.target.value })
+                }
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                rows={2}
+              />
+            </div>
+
+            <div>
+              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                Promo Code
+              </Label>
+              <Input
+                value={block.promoCode}
+                onChange={(e) =>
+                  onBlockUpdate({ ...block, promoCode: e.target.value })
+                }
+                className="focus:ring-valasys-orange focus:ring-2"
+              />
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Typography
+              </h4>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-gray-700 mb-1 block">
+                      Text Size
+                    </Label>
+                    <Input
+                      type="number"
+                      value={block.fontSize}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          fontSize: parseInt(e.target.value) || 16,
+                        })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-gray-700 mb-1 block">
+                      Code Size
+                    </Label>
+                    <Input
+                      type="number"
+                      value={block.promoCodeFontSize}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          promoCodeFontSize: parseInt(e.target.value) || 36,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <Label className="text-xs text-gray-700 mb-1 block">
+                      Text Color
+                    </Label>
+                    <Input
+                      type="color"
+                      value={block.fontColor}
+                      onChange={(e) =>
+                        onBlockUpdate({ ...block, fontColor: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-gray-700 mb-1 block">
+                      Code Color
+                    </Label>
+                    <Input
+                      type="color"
+                      value={block.promoCodeColor}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...block,
+                          promoCodeColor: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Letter Spacing (px)
+                  </Label>
+                  <Input
+                    type="number"
+                    value={block.letterSpacing}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        letterSpacing: parseInt(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">
+                Appearance
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Background Color
+                  </Label>
+                  <Input
+                    type="color"
+                    value={block.backgroundColor}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        backgroundColor: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Border Radius
+                  </Label>
+                  <Input
+                    type="number"
+                    value={block.borderRadius}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        borderRadius: parseInt(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
