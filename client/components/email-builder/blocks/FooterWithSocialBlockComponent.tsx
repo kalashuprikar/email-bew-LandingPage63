@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import React from "react";
 import { Copy, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FooterWithSocialBlock } from "../types";
