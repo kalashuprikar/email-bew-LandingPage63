@@ -9,12 +9,18 @@ interface FeaturesBlockComponentProps {
   block: FeaturesBlock;
   isSelected: boolean;
   onUpdate: (block: FeaturesBlock) => void;
+  onDuplicate?: (block: FeaturesBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
+  blockIndex?: number;
 }
 
 export const FeaturesBlockComponent: React.FC<FeaturesBlockComponentProps> = ({
   block,
   isSelected,
   onUpdate,
+  onDuplicate,
+  onDelete,
+  blockIndex = 0,
 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [hoveredFieldId, setHoveredFieldId] = useState<string | null>(null);

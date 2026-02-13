@@ -9,12 +9,18 @@ interface StatsBlockComponentProps {
   block: StatsBlock;
   isSelected: boolean;
   onUpdate: (block: StatsBlock) => void;
+  onDuplicate?: (block: StatsBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
+  blockIndex?: number;
 }
 
 export const StatsBlockComponent: React.FC<StatsBlockComponentProps> = ({
   block,
   isSelected,
   onUpdate,
+  onDuplicate,
+  onDelete,
+  blockIndex = 0,
 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [hoveredFieldId, setHoveredFieldId] = useState<string | null>(null);

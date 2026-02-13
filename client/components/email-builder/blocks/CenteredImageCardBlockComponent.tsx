@@ -10,6 +10,8 @@ interface CenteredImageCardBlockComponentProps {
   isSelected: boolean;
   onBlockUpdate: (block: CenteredImageCardBlock) => void;
   blockIndex?: number;
+  onDuplicate?: (block: CenteredImageCardBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
 }
 
 // Helper to generate unique IDs
@@ -50,7 +52,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 
 export const CenteredImageCardBlockComponent: React.FC<
   CenteredImageCardBlockComponentProps
-> = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
+> = ({ block, isSelected, onBlockUpdate, blockIndex = 0, onDuplicate, onDelete }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isResizing, setIsResizing] = useState(false);
   const [resizeHandle, setResizeHandle] = useState<string | null>(null);

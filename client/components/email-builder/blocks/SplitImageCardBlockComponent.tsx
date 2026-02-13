@@ -9,6 +9,8 @@ interface SplitImageCardBlockComponentProps {
   isSelected: boolean;
   onBlockUpdate: (block: SplitImageCardBlock) => void;
   blockIndex?: number;
+  onDuplicate?: (block: SplitImageCardBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
 }
 
 // Helper to generate unique IDs
@@ -49,7 +51,7 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
 
 export const SplitImageCardBlockComponent: React.FC<
   SplitImageCardBlockComponentProps
-> = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
+> = ({ block, isSelected, onBlockUpdate, blockIndex = 0, onDuplicate, onDelete }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isHoveringImage, setIsHoveringImage] = useState(false);
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
