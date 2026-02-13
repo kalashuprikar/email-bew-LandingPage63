@@ -68,9 +68,9 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ template }) => {
     .map((item) => {
       if (item._isInlineGroup) {
         const inlineHtml = item.blocks
-          .map((block: any) => renderBlockToHTML(block))
+          .map((block: any) => `<div style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center;">${renderBlockToHTML(block)}</div>`)
           .join("");
-        return `<div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 24px; width: 100%;">${inlineHtml}</div>`;
+        return `<div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 24px; width: 100%; margin: 0 auto;">${inlineHtml}</div>`;
       }
       return renderBlockToHTML(item);
     })
