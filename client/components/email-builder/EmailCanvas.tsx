@@ -235,9 +235,16 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                                 onAddBlock(newBlock, position);
                               }}
                               onDuplicate={(blockToDuplicate, position) => {
-                                onDuplicateBlock?.(blockToDuplicate, position);
+                                // Duplicate entire inline group, not just individual block
+                                const lastInlineBlockIndex = index + inlineBlocks.length - 1;
+                                inlineBlocks.forEach((block, idx) => {
+                                  onDuplicateBlock?.(block, lastInlineBlockIndex + 1 + idx);
+                                });
                               }}
-                              onDelete={(blockId) => onDeleteBlock?.(blockId)}
+                              onDelete={(blockId) => {
+                                // If all blocks in group are deleted, it will be handled automatically
+                                onDeleteBlock?.(blockId);
+                              }}
                               isPartOfInlineGroup={true}
                             />
                           </div>
