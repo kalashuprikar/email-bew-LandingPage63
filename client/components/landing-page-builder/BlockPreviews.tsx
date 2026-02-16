@@ -184,6 +184,7 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
   const [isEditingButton, setIsEditingButton] = React.useState(false);
   const [editButtonText, setEditButtonText] = React.useState(props.ctaButtonText || "");
   const [hoveredElement, setHoveredElement] = React.useState<"heading" | "subheading" | "button" | null>(null);
+  const [selectedElement, setSelectedElement] = React.useState<"heading" | "subheading" | "button" | null>(null);
 
   const handleHeadlineSave = () => {
     if (editHeadingText.trim()) {
@@ -206,6 +207,36 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
     setIsEditingButton(false);
   };
 
+  const handleCopyHeading = () => {
+    onUpdate?.({ ...props, headline: props.headline + " (Copy)" });
+    setSelectedElement(null);
+  };
+
+  const handleDeleteHeading = () => {
+    onUpdate?.({ ...props, headline: "" });
+    setSelectedElement(null);
+  };
+
+  const handleCopySubheading = () => {
+    onUpdate?.({ ...props, subheading: props.subheading + " (Copy)" });
+    setSelectedElement(null);
+  };
+
+  const handleDeleteSubheading = () => {
+    onUpdate?.({ ...props, subheading: "" });
+    setSelectedElement(null);
+  };
+
+  const handleCopyButton = () => {
+    onUpdate?.({ ...props, ctaButtonText: props.ctaButtonText + " (Copy)" });
+    setSelectedElement(null);
+  };
+
+  const handleDeleteButton = () => {
+    onUpdate?.({ ...props, ctaButtonText: "" });
+    setSelectedElement(null);
+  };
+
   return (
     <div
       onClick={onSelect}
@@ -222,10 +253,15 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
         {/* Heading */}
         <div
           className={`relative mb-4 px-4 py-2 rounded transition-all ${
+            selectedElement === "heading" ? "border-2 border-solid border-valasys-orange" :
             hoveredElement === "heading" ? "border-2 border-dashed border-valasys-orange" : ""
           }`}
           onMouseEnter={() => setHoveredElement("heading")}
           onMouseLeave={() => setHoveredElement(null)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedElement("heading");
+          }}
         >
           {isEditingHeading ? (
             <input
@@ -256,15 +292,45 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
               {props.headline}
             </h1>
           )}
+
+          {selectedElement === "heading" && !isEditingHeading && (
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white rounded-lg border border-valasys-orange p-2 z-50 mt-2">
+              <button
+                className="h-8 w-8 p-0 hover:bg-orange-50 hover:text-valasys-orange transition-colors flex items-center justify-center rounded"
+                title="Copy heading"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopyHeading();
+                }}
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+              <button
+                className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600 transition-colors flex items-center justify-center rounded"
+                title="Delete heading"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteHeading();
+                }}
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Subheading */}
         <div
           className={`relative mb-8 px-4 py-2 rounded transition-all max-w-2xl ${
+            selectedElement === "subheading" ? "border-2 border-solid border-valasys-orange" :
             hoveredElement === "subheading" ? "border-2 border-dashed border-valasys-orange" : ""
           }`}
           onMouseEnter={() => setHoveredElement("subheading")}
           onMouseLeave={() => setHoveredElement(null)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedElement("subheading");
+          }}
         >
           {isEditingSubheading ? (
             <input
@@ -295,15 +361,45 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
               {props.subheading}
             </p>
           )}
+
+          {selectedElement === "subheading" && !isEditingSubheading && (
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white rounded-lg border border-valasys-orange p-2 z-50 mt-2">
+              <button
+                className="h-8 w-8 p-0 hover:bg-orange-50 hover:text-valasys-orange transition-colors flex items-center justify-center rounded"
+                title="Copy subheading"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopySubheading();
+                }}
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+              <button
+                className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600 transition-colors flex items-center justify-center rounded"
+                title="Delete subheading"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteSubheading();
+                }}
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* CTA Button */}
         <div
           className={`relative px-4 py-2 rounded transition-all ${
+            selectedElement === "button" ? "border-2 border-solid border-valasys-orange" :
             hoveredElement === "button" ? "border-2 border-dashed border-valasys-orange" : ""
           }`}
           onMouseEnter={() => setHoveredElement("button")}
           onMouseLeave={() => setHoveredElement(null)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedElement("button");
+          }}
         >
           {isEditingButton ? (
             <input
@@ -335,6 +431,31 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
             >
               {props.ctaButtonText}
             </button>
+          )}
+
+          {selectedElement === "button" && !isEditingButton && (
+            <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white rounded-lg border border-valasys-orange p-2 z-50 mt-2">
+              <button
+                className="h-8 w-8 p-0 hover:bg-orange-50 hover:text-valasys-orange transition-colors flex items-center justify-center rounded"
+                title="Copy button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopyButton();
+                }}
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+              <button
+                className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600 transition-colors flex items-center justify-center rounded"
+                title="Delete button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteButton();
+                }}
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
           )}
         </div>
 
