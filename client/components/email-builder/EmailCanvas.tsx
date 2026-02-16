@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { EmailTemplate, ContentBlock } from "./types";
 import { DraggableBlock } from "./DraggableBlock";
+import { DropZone } from "./DropZone";
 
 interface EmailCanvasProps {
   template: EmailTemplate;
@@ -45,12 +46,12 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
   const [selectedInlineGroup, setSelectedInlineGroup] = useState<string | null>(null);
 
   const [{ isOver }, drop] = useDrop(() => ({
-    accept: ["block", "template"],
+    accept: ["template"],
     drop: (item: any, monitor) => {
       // Only process if this is a direct drop on the canvas, not on a nested element
       const didDropInNestedZone = monitor.didDrop();
       if (didDropInNestedZone) {
-        return; // A nested drop zone (like CardDropZone) already handled it
+        return; // A nested drop zone already handled it
       }
 
       if (item.blocks) {
@@ -58,9 +59,6 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
         item.blocks.forEach((block: ContentBlock) => {
           onAddBlock(block);
         });
-      } else if (item.block) {
-        // Single block dropped at the end
-        onAddBlock(item.block);
       }
     },
     collect: (monitor) => ({
@@ -136,21 +134,16 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
           }}
         >
           {template.blocks.length === 0 ? (
-            <div className="text-center py-16 text-gray-400">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <Mail className="w-8 h-8 text-gray-300" />
-                </div>
+            <div className="flex items-center justify-center py-16">
+              <div className="w-full max-w-md">
+                <DropZone position={0} onBlockDrop={onAddBlock} isEmpty={true} />
               </div>
-              <p className="mb-2 text-gray-600 font-medium">
-                Drop content here
-              </p>
-              <p className="text-sm text-gray-400">
-                Drag blocks from the left sidebar to add them to your email
-              </p>
             </div>
           ) : (
             <div className="w-full flex flex-col">
+              {/* Drop zone at the beginning */}
+              <DropZone position={0} onBlockDrop={onAddBlock} />
+
               {template.blocks.map((block, index) => {
                 const isInlineDisplay = (block as any).displayMode === "inline";
                 const nextBlock = template.blocks[index + 1];
@@ -310,6 +303,8 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                           </div>
                         )}
                       </div>
+                      {/* Drop zone after inline group */}
+                      <DropZone position={currentIndex} onBlockDrop={onAddBlock} />
                     </React.Fragment>
                   );
                 }
@@ -336,6 +331,8 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
                       }}
                       onDelete={(blockId) => onDeleteBlock?.(blockId)}
                     />
+                    {/* Drop zone after each block */}
+                    <DropZone position={index + 1} onBlockDrop={onAddBlock} />
                   </React.Fragment>
                 );
               })}
