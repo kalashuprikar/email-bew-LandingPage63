@@ -191,6 +191,14 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
   const [editButtonText, setEditButtonText] = React.useState(props.ctaButtonText || "");
   const [hoveredElement, setHoveredElement] = React.useState<"heading" | "subheading" | "button" | null | string>(null);
   const [selectedCopyElement, setSelectedCopyElement] = React.useState<string | null>(null);
+  const headingTextareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const subheadingTextareaRef = React.useRef<HTMLTextAreaElement>(null);
+
+  const adjustTextareaHeight = (textarea: HTMLTextAreaElement | null) => {
+    if (!textarea) return;
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  };
 
   // Element order management - default order is heading, subheading, button
   const elementOrder = props.elementOrder || ["heading", "subheading", "button"];
@@ -278,7 +286,7 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
 
   const renderHeadingElement = () => (
     <div
-      className={`relative mb-4 px-4 py-2 rounded transition-all cursor-move group ${
+      className={`relative mb-4 px-4 py-2 rounded transition-all cursor-move group w-full ${
         selectedElement === "heading" ? "border-2 border-solid border-valasys-orange" :
         hoveredElement === "heading" ? "border-2 border-dashed border-valasys-orange" : ""
       }`}
@@ -291,8 +299,12 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
     >
       {isEditingHeading ? (
         <textarea
+          ref={headingTextareaRef}
           value={editHeadingText}
-          onChange={(e) => setEditHeadingText(e.target.value)}
+          onChange={(e) => {
+            setEditHeadingText(e.target.value);
+            adjustTextareaHeight(headingTextareaRef.current);
+          }}
           onBlur={handleHeadlineSave}
           onKeyDown={(e) => {
             if (e.key === "Escape") {
@@ -301,13 +313,16 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
             }
           }}
           onClick={(e) => e.stopPropagation()}
-          className="w-full text-2xl md:text-5xl font-bold text-gray-900 px-2 py-1 focus:outline-none bg-transparent resize-none overflow-hidden"
+          className="w-full text-2xl md:text-5xl font-bold text-gray-900 px-2 py-1 focus:outline-none bg-transparent resize-none overflow-hidden whitespace-pre-wrap break-words"
           autoFocus
+          onFocus={(e) => {
+            setTimeout(() => adjustTextareaHeight(e.target as HTMLTextAreaElement), 0);
+          }}
         />
       ) : (
         <h1
-          className="text-2xl md:text-5xl font-bold cursor-text"
-          style={{ color: props.headlineColor || "#1f2937" }}
+          className="text-2xl md:text-5xl font-bold cursor-text break-words"
+          style={{ color: props.headlineColor || "#1f2937", wordBreak: "break-word" }}
           onDoubleClick={(e) => {
             e.stopPropagation();
             setEditHeadingText(props.headline || "");
@@ -347,7 +362,7 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
 
   const renderSubheadingElement = () => (
     <div
-      className={`relative mb-8 px-4 py-2 rounded transition-all max-w-2xl cursor-move group ${
+      className={`relative mb-8 px-4 py-2 rounded transition-all w-full cursor-move group ${
         selectedElement === "subheading" ? "border-2 border-solid border-valasys-orange" :
         hoveredElement === "subheading" ? "border-2 border-dashed border-valasys-orange" : ""
       }`}
@@ -360,8 +375,12 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
     >
       {isEditingSubheading ? (
         <textarea
+          ref={subheadingTextareaRef}
           value={editSubheadingText}
-          onChange={(e) => setEditSubheadingText(e.target.value)}
+          onChange={(e) => {
+            setEditSubheadingText(e.target.value);
+            adjustTextareaHeight(subheadingTextareaRef.current);
+          }}
           onBlur={handleSubheadingSave}
           onKeyDown={(e) => {
             if (e.key === "Escape") {
@@ -370,13 +389,16 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
             }
           }}
           onClick={(e) => e.stopPropagation()}
-          className="w-full text-sm md:text-xl text-gray-600 px-2 py-1 focus:outline-none bg-transparent resize-none overflow-hidden"
+          className="w-full text-sm md:text-xl text-gray-600 px-2 py-1 focus:outline-none bg-transparent resize-none overflow-hidden whitespace-pre-wrap break-words"
           autoFocus
+          onFocus={(e) => {
+            setTimeout(() => adjustTextareaHeight(e.target as HTMLTextAreaElement), 0);
+          }}
         />
       ) : (
         <p
-          className="text-sm md:text-xl cursor-text"
-          style={{ color: props.subheadingColor || "#4b5563" }}
+          className="text-sm md:text-xl cursor-text break-words"
+          style={{ color: props.subheadingColor || "#4b5563", wordBreak: "break-word" }}
           onDoubleClick={(e) => {
             e.stopPropagation();
             setEditSubheadingText(props.subheading || "");
