@@ -340,22 +340,133 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 Use overlay to make text more readable over the background image
               </p>
             </div>
-            <div>
-              <Label className="text-xs font-semibold text-gray-700 mb-2 block">
-                Min Height (px)
-              </Label>
-              <Input
-                type="text"
-                value={props.minHeight || "500px"}
-                onChange={(e) =>
-                  onBlockUpdate({
-                    ...block,
-                    properties: { ...props, minHeight: e.target.value },
-                  })
-                }
-                onKeyDown={(e) => handleSizeKeyDown(e, "minHeight", props.minHeight || "500px")}
-                className="focus:ring-valasys-orange focus:ring-2"
-              />
+            <div className="border-t border-gray-200 pt-4 mt-4">
+              <h3 className="text-xs font-semibold text-gray-700 mb-4 block">Size & Spacing</h3>
+              <div>
+                <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                  Width
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="100%, 500px, etc."
+                    value={props.width ?? "100%"}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, width: e.target.value },
+                      })
+                    }
+                    onKeyDown={(e) => handleSizeKeyDown(e, "width", props.width ?? "100%")}
+                    className="focus:ring-valasys-orange focus:ring-2 flex-1"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toggleUnit("width", props.width ?? "100%")}
+                    className="px-2 text-xs"
+                  >
+                    {(props.width ?? "100%").includes("%") ? "px" : "%"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, width: "100%" },
+                      })
+                    }
+                    className="px-2 text-xs"
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </div>
+              <div className="mt-3">
+                <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                  Height
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="auto or number"
+                    value={props.height ?? "auto"}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, height: e.target.value },
+                      })
+                    }
+                    onKeyDown={(e) => handleSizeKeyDown(e, "height", props.height ?? "auto")}
+                    className="focus:ring-valasys-orange focus:ring-2 flex-1"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      const current = props.height ?? "auto";
+                      if (current === "auto") {
+                        onBlockUpdate({
+                          ...block,
+                          properties: { ...props, height: "100px" },
+                        });
+                      } else {
+                        toggleUnit("height", current);
+                      }
+                    }}
+                    className="px-2 text-xs"
+                  >
+                    {(props.height ?? "auto") === "auto" ? "px/%" : (props.height ?? "auto").includes("%") ? "px" : "%"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, height: "auto" },
+                      })
+                    }
+                    className="px-2 text-xs"
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </div>
+              <div className="mt-3">
+                <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                  Min Height
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="500px, etc."
+                    value={props.minHeight || "500px"}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, minHeight: e.target.value },
+                      })
+                    }
+                    onKeyDown={(e) => handleSizeKeyDown(e, "minHeight", props.minHeight || "500px")}
+                    className="focus:ring-valasys-orange focus:ring-2 flex-1"
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      onBlockUpdate({
+                        ...block,
+                        properties: { ...props, minHeight: "500px" },
+                      })
+                    }
+                    className="px-2 text-xs"
+                  >
+                    Reset
+                  </Button>
+                </div>
+              </div>
             </div>
             <div className="border-t border-gray-200 pt-4 mt-4">
               <h3 className="text-xs font-semibold text-gray-700 mb-4 block">Headline Sizing</h3>
