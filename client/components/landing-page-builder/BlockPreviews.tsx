@@ -509,7 +509,9 @@ export const HeroBlockPreview: React.FC<BlockPreviewProps> = ({
           <button
             style={{
               backgroundColor: props.ctaButtonColor,
-              color: props.ctaButtonTextColor || "#ffffff"
+              color: props.ctaButtonTextColor || "#ffffff",
+              width: props.ctaButtonWidth || "auto",
+              height: props.ctaButtonHeight || "auto"
             }}
             className="px-6 md:px-8 py-2 md:py-3 font-medium rounded hover:opacity-90 transition-opacity text-sm md:text-base cursor-text"
             onDoubleClick={(e) => {

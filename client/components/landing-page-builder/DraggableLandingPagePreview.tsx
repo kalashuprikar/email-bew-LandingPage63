@@ -434,7 +434,6 @@ export const DraggableLandingPagePreview: React.FC<
         selectedElement={isSelected ? selectedElement : null}
         onSelect={() => {
           onSelectBlock(block.id);
-          onElementSelect?.(null);
         }}
         onElementSelect={onElementSelect}
         onUpdate={(props: Record<string, any>) =>

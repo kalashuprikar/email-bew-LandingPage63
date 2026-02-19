@@ -32,10 +32,22 @@ export const LandingPageSettingsPanel: React.FC<
   onLinkSelect
 }) => {
   const [localProps, setLocalProps] = useState(block?.properties || {});
+  const [headlineWidthUnit, setHeadlineWidthUnit] = useState<"%" | "px">(String(block?.properties?.headlineWidth || "100%").includes("%") ? "%" : "px");
+  const [headlineHeightUnit, setHeadlineHeightUnit] = useState<"%" | "px">(String(block?.properties?.headlineHeight || "auto").includes("%") ? "%" : "px");
+  const [subheadingWidthUnit, setSubheadingWidthUnit] = useState<"%" | "px">(String(block?.properties?.subheadingWidth || "100%").includes("%") ? "%" : "px");
+  const [subheadingHeightUnit, setSubheadingHeightUnit] = useState<"%" | "px">(String(block?.properties?.subheadingHeight || "auto").includes("%") ? "%" : "px");
+  const [buttonWidthUnit, setButtonWidthUnit] = useState<"%" | "px">(String(block?.properties?.ctaButtonWidth || "auto").includes("%") ? "%" : "px");
+  const [buttonHeightUnit, setButtonHeightUnit] = useState<"%" | "px">(String(block?.properties?.ctaButtonHeight || "auto").includes("%") ? "%" : "px");
 
   useEffect(() => {
     if (block) {
       setLocalProps(block.properties);
+      setHeadlineWidthUnit(String(block.properties?.headlineWidth || "100%").includes("%") ? "%" : "px");
+      setHeadlineHeightUnit(String(block.properties?.headlineHeight || "auto").includes("%") ? "%" : "px");
+      setSubheadingWidthUnit(String(block.properties?.subheadingWidth || "100%").includes("%") ? "%" : "px");
+      setSubheadingHeightUnit(String(block.properties?.subheadingHeight || "auto").includes("%") ? "%" : "px");
+      setButtonWidthUnit(String(block.properties?.ctaButtonWidth || "auto").includes("%") ? "%" : "px");
+      setButtonHeightUnit(String(block.properties?.ctaButtonHeight || "auto").includes("%") ? "%" : "px");
     }
   }, [block?.id]);
 
@@ -137,24 +149,41 @@ export const LandingPageSettingsPanel: React.FC<
                     <div className="flex gap-2">
                       <Input
                         type="text"
-                        value={localProps.headlineWidth ?? "100%"}
-                        onChange={(e) => updateProperty("headlineWidth", e.target.value)}
-                        onKeyDown={(e) => handleSizeKeyDown(e, "headlineWidth", localProps.headlineWidth ?? "100%")}
-                        placeholder="100%, 500px, etc."
+                        value={String(localProps.headlineWidth || "100%").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const unit = String(localProps.headlineWidth || "100%").includes("%") ? "%" : "px";
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("headlineWidth", "100%");
+                            return;
+                          }
+                          const num = parseInt(numericOnly, 10);
+                          if (unit === "%" && num > 100) {
+                            return;
+                          }
+                          updateProperty("headlineWidth", `${num}${unit}`);
+                        }}
+                        placeholder="100"
                         className="flex-1"
                       />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          const current = localProps.headlineWidth ?? "100%";
-                          const hasPercent = current.includes("%");
-                          toggleUnit("headlineWidth", current, hasPercent ? "%" : "px", hasPercent ? "px" : "%");
+                      <select
+                        value={String(localProps.headlineWidth || "100%").includes("%") ? "%" : "px"}
+                        onChange={(e) => {
+                          const currentNum = parseInt(String(localProps.headlineWidth || "100").replace(/[^0-9]/g, ""), 10) || 100;
+                          const unit = e.target.value;
+                          if (unit === "%") {
+                            const cappedNum = Math.min(currentNum, 100);
+                            updateProperty("headlineWidth", `${cappedNum}${unit}`);
+                          } else {
+                            updateProperty("headlineWidth", `${currentNum}${unit}`);
+                          }
                         }}
-                        className="px-2 text-xs"
+                        className="px-3 py-2 border border-input rounded-md bg-background text-sm"
                       >
-                        {(localProps.headlineWidth ?? "100%").includes("%") ? "px" : "%"}
-                      </Button>
+                        <option value="%">%</option>
+                        <option value="px">px</option>
+                      </select>
                       <Button
                         variant="outline"
                         size="sm"
@@ -170,28 +199,41 @@ export const LandingPageSettingsPanel: React.FC<
                     <div className="flex gap-2">
                       <Input
                         type="text"
-                        value={localProps.headlineHeight ?? "auto"}
-                        onChange={(e) => updateProperty("headlineHeight", e.target.value)}
-                        onKeyDown={(e) => handleSizeKeyDown(e, "headlineHeight", localProps.headlineHeight ?? "auto")}
-                        placeholder="auto, 200px, etc."
+                        value={String(localProps.headlineHeight || "auto").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const unit = String(localProps.headlineHeight || "auto").includes("%") ? "%" : "px";
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("headlineHeight", "auto");
+                            return;
+                          }
+                          const num = parseInt(numericOnly, 10);
+                          if (unit === "%" && num > 100) {
+                            return;
+                          }
+                          updateProperty("headlineHeight", `${num}${unit}`);
+                        }}
+                        placeholder="auto or number"
                         className="flex-1"
                       />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          const current = localProps.headlineHeight ?? "auto";
-                          if (current === "auto") {
-                            updateProperty("headlineHeight", "100px");
+                      <select
+                        value={String(localProps.headlineHeight || "auto").includes("%") ? "%" : "px"}
+                        onChange={(e) => {
+                          const currentNum = parseInt(String(localProps.headlineHeight || "100").replace(/[^0-9]/g, ""), 10) || 100;
+                          const unit = e.target.value;
+                          if (unit === "%") {
+                            const cappedNum = Math.min(currentNum, 100);
+                            updateProperty("headlineHeight", `${cappedNum}${unit}`);
                           } else {
-                            const hasPercent = current.includes("%");
-                            toggleUnit("headlineHeight", current, hasPercent ? "%" : "px", hasPercent ? "px" : "%");
+                            updateProperty("headlineHeight", `${currentNum}${unit}`);
                           }
                         }}
-                        className="px-2 text-xs"
+                        className="px-3 py-2 border border-input rounded-md bg-background text-sm"
                       >
-                        {(localProps.headlineHeight ?? "auto") === "auto" ? "px/%" : (localProps.headlineHeight ?? "auto").includes("%") ? "px" : "%"}
-                      </Button>
+                        <option value="%">%</option>
+                        <option value="px">px</option>
+                      </select>
                       <Button
                         variant="outline"
                         size="sm"
@@ -241,24 +283,41 @@ export const LandingPageSettingsPanel: React.FC<
                     <div className="flex gap-2">
                       <Input
                         type="text"
-                        value={localProps.subheadingWidth ?? "100%"}
-                        onChange={(e) => updateProperty("subheadingWidth", e.target.value)}
-                        onKeyDown={(e) => handleSizeKeyDown(e, "subheadingWidth", localProps.subheadingWidth ?? "100%")}
-                        placeholder="100%, 500px, etc."
+                        value={String(localProps.subheadingWidth || "100%").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const unit = String(localProps.subheadingWidth || "100%").includes("%") ? "%" : "px";
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("subheadingWidth", "100%");
+                            return;
+                          }
+                          const num = parseInt(numericOnly, 10);
+                          if (unit === "%" && num > 100) {
+                            return;
+                          }
+                          updateProperty("subheadingWidth", `${num}${unit}`);
+                        }}
+                        placeholder="100"
                         className="flex-1"
                       />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          const current = localProps.subheadingWidth ?? "100%";
-                          const hasPercent = current.includes("%");
-                          toggleUnit("subheadingWidth", current, hasPercent ? "%" : "px", hasPercent ? "px" : "%");
+                      <select
+                        value={String(localProps.subheadingWidth || "100%").includes("%") ? "%" : "px"}
+                        onChange={(e) => {
+                          const currentNum = parseInt(String(localProps.subheadingWidth || "100").replace(/[^0-9]/g, ""), 10) || 100;
+                          const unit = e.target.value;
+                          if (unit === "%") {
+                            const cappedNum = Math.min(currentNum, 100);
+                            updateProperty("subheadingWidth", `${cappedNum}${unit}`);
+                          } else {
+                            updateProperty("subheadingWidth", `${currentNum}${unit}`);
+                          }
                         }}
-                        className="px-2 text-xs"
+                        className="px-3 py-2 border border-input rounded-md bg-background text-sm"
                       >
-                        {(localProps.subheadingWidth ?? "100%").includes("%") ? "px" : "%"}
-                      </Button>
+                        <option value="%">%</option>
+                        <option value="px">px</option>
+                      </select>
                       <Button
                         variant="outline"
                         size="sm"
@@ -274,28 +333,41 @@ export const LandingPageSettingsPanel: React.FC<
                     <div className="flex gap-2">
                       <Input
                         type="text"
-                        value={localProps.subheadingHeight ?? "auto"}
-                        onChange={(e) => updateProperty("subheadingHeight", e.target.value)}
-                        onKeyDown={(e) => handleSizeKeyDown(e, "subheadingHeight", localProps.subheadingHeight ?? "auto")}
-                        placeholder="auto, 100px, etc."
+                        value={String(localProps.subheadingHeight || "auto").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const unit = String(localProps.subheadingHeight || "auto").includes("%") ? "%" : "px";
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("subheadingHeight", "auto");
+                            return;
+                          }
+                          const num = parseInt(numericOnly, 10);
+                          if (unit === "%" && num > 100) {
+                            return;
+                          }
+                          updateProperty("subheadingHeight", `${num}${unit}`);
+                        }}
+                        placeholder="auto or number"
                         className="flex-1"
                       />
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          const current = localProps.subheadingHeight ?? "auto";
-                          if (current === "auto") {
-                            updateProperty("subheadingHeight", "100px");
+                      <select
+                        value={String(localProps.subheadingHeight || "auto").includes("%") ? "%" : "px"}
+                        onChange={(e) => {
+                          const currentNum = parseInt(String(localProps.subheadingHeight || "100").replace(/[^0-9]/g, ""), 10) || 100;
+                          const unit = e.target.value;
+                          if (unit === "%") {
+                            const cappedNum = Math.min(currentNum, 100);
+                            updateProperty("subheadingHeight", `${cappedNum}${unit}`);
                           } else {
-                            const hasPercent = current.includes("%");
-                            toggleUnit("subheadingHeight", current, hasPercent ? "%" : "px", hasPercent ? "px" : "%");
+                            updateProperty("subheadingHeight", `${currentNum}${unit}`);
                           }
                         }}
-                        className="px-2 text-xs"
+                        className="px-3 py-2 border border-input rounded-md bg-background text-sm"
                       >
-                        {(localProps.subheadingHeight ?? "auto") === "auto" ? "px/%" : (localProps.subheadingHeight ?? "auto").includes("%") ? "px" : "%"}
-                      </Button>
+                        <option value="%">%</option>
+                        <option value="px">px</option>
+                      </select>
                       <Button
                         variant="outline"
                         size="sm"
@@ -351,6 +423,90 @@ export const LandingPageSettingsPanel: React.FC<
                       placeholder="#ffffff"
                       className="flex-1"
                     />
+                  </div>
+                </div>
+                <div className="border-t border-gray-200 pt-4 mt-4">
+                  <Label className="text-sm font-medium block mb-3">Size & Spacing</Label>
+                  <div>
+                    <Label className="text-xs text-gray-600 mb-1 block">Width</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        type="text"
+                        value={String(localProps.ctaButtonWidth || "auto").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("ctaButtonWidth", "auto");
+                            return;
+                          }
+                          updateProperty("ctaButtonWidth", `${numericOnly}px`);
+                        }}
+                        placeholder="auto or number"
+                        className="flex-1"
+                      />
+                      <div className="px-3 py-2 border border-input rounded-md bg-background text-sm flex items-center text-gray-500">
+                        px
+                      </div>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateProperty("ctaButtonWidth", "auto")}
+                        className="px-3"
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <Label className="text-xs text-gray-600 mb-1 block">Height</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        type="text"
+                        value={String(localProps.ctaButtonHeight || "auto").replace(/[^0-9]/g, "")}
+                        onChange={(e) => {
+                          const unit = String(localProps.ctaButtonHeight || "auto").includes("%") ? "%" : "px";
+                          const inputValue = e.target.value;
+                          const numericOnly = inputValue.replace(/[^0-9]/g, "");
+                          if (numericOnly === "") {
+                            updateProperty("ctaButtonHeight", "auto");
+                            return;
+                          }
+                          const num = parseInt(numericOnly, 10);
+                          if (unit === "%" && num > 100) {
+                            return;
+                          }
+                          updateProperty("ctaButtonHeight", `${num}${unit}`);
+                        }}
+                        placeholder="auto or number"
+                        className="flex-1"
+                      />
+                      <select
+                        value={String(localProps.ctaButtonHeight || "auto").includes("%") ? "%" : "px"}
+                        onChange={(e) => {
+                          const currentNum = parseInt(String(localProps.ctaButtonHeight || "100").replace(/[^0-9]/g, ""), 10) || 100;
+                          const unit = e.target.value;
+                          if (unit === "%") {
+                            const cappedNum = Math.min(currentNum, 100);
+                            updateProperty("ctaButtonHeight", `${cappedNum}${unit}`);
+                          } else {
+                            updateProperty("ctaButtonHeight", `${currentNum}${unit}`);
+                          }
+                        }}
+                        className="px-3 py-2 border border-input rounded-md bg-background text-sm"
+                      >
+                        <option value="%">%</option>
+                        <option value="px">px</option>
+                      </select>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateProperty("ctaButtonHeight", "auto")}
+                        className="px-3"
+                      >
+                        Reset
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </>
