@@ -353,6 +353,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     properties: { ...props, minHeight: e.target.value },
                   })
                 }
+                onKeyDown={(e) => handleSizeKeyDown(e, "minHeight", props.minHeight || "500px")}
                 className="focus:ring-valasys-orange focus:ring-2"
               />
             </div>

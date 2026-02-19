@@ -188,7 +188,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("headlineWidth", "100%")}
+                        onClick={() => updateProperty("headlineWidth", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -239,7 +239,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("headlineHeight", "auto")}
+                        onClick={() => updateProperty("headlineHeight", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -324,7 +324,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("subheadingWidth", "100%")}
+                        onClick={() => updateProperty("subheadingWidth", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -375,7 +375,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("subheadingHeight", "auto")}
+                        onClick={() => updateProperty("subheadingHeight", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -456,7 +456,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("ctaButtonWidth", "auto")}
+                        onClick={() => updateProperty("ctaButtonWidth", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -507,7 +507,7 @@ export const LandingPageSettingsPanel: React.FC<
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => updateProperty("ctaButtonHeight", "auto")}
+                        onClick={() => updateProperty("ctaButtonHeight", "0px")}
                         className="px-3"
                       >
                         Reset
@@ -892,6 +892,7 @@ export const LandingPageSettingsPanel: React.FC<
 
               updateProperty("minHeight", `${numericOnly}px`);
             }}
+            onKeyDown={(e) => handleSizeKeyDown(e, "minHeight", String(localProps.minHeight || "500px"))}
             placeholder="500"
             className="flex-1"
           />
