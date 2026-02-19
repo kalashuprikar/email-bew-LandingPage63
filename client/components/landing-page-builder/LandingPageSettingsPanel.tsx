@@ -32,10 +32,22 @@ export const LandingPageSettingsPanel: React.FC<
   onLinkSelect
 }) => {
   const [localProps, setLocalProps] = useState(block?.properties || {});
+  const [headlineWidthUnit, setHeadlineWidthUnit] = useState<"%" | "px">(String(block?.properties?.headlineWidth || "100%").includes("%") ? "%" : "px");
+  const [headlineHeightUnit, setHeadlineHeightUnit] = useState<"%" | "px">(String(block?.properties?.headlineHeight || "auto").includes("%") ? "%" : "px");
+  const [subheadingWidthUnit, setSubheadingWidthUnit] = useState<"%" | "px">(String(block?.properties?.subheadingWidth || "100%").includes("%") ? "%" : "px");
+  const [subheadingHeightUnit, setSubheadingHeightUnit] = useState<"%" | "px">(String(block?.properties?.subheadingHeight || "auto").includes("%") ? "%" : "px");
+  const [buttonWidthUnit, setButtonWidthUnit] = useState<"%" | "px">(String(block?.properties?.ctaButtonWidth || "auto").includes("%") ? "%" : "px");
+  const [buttonHeightUnit, setButtonHeightUnit] = useState<"%" | "px">(String(block?.properties?.ctaButtonHeight || "auto").includes("%") ? "%" : "px");
 
   useEffect(() => {
     if (block) {
       setLocalProps(block.properties);
+      setHeadlineWidthUnit(String(block.properties?.headlineWidth || "100%").includes("%") ? "%" : "px");
+      setHeadlineHeightUnit(String(block.properties?.headlineHeight || "auto").includes("%") ? "%" : "px");
+      setSubheadingWidthUnit(String(block.properties?.subheadingWidth || "100%").includes("%") ? "%" : "px");
+      setSubheadingHeightUnit(String(block.properties?.subheadingHeight || "auto").includes("%") ? "%" : "px");
+      setButtonWidthUnit(String(block.properties?.ctaButtonWidth || "auto").includes("%") ? "%" : "px");
+      setButtonHeightUnit(String(block.properties?.ctaButtonHeight || "auto").includes("%") ? "%" : "px");
     }
   }, [block?.id]);
 
