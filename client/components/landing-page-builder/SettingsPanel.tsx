@@ -305,7 +305,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="100%, 500px, etc."
-                  value={props.headlineWidth || "100%"}
+                  value={props.headlineWidth ?? "100%"}
                   onChange={(e) =>
                     onBlockUpdate({
                       ...block,
@@ -322,7 +322,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="auto, 200px, etc."
-                  value={props.headlineHeight || "auto"}
+                  value={props.headlineHeight ?? "auto"}
                   onChange={(e) =>
                     onBlockUpdate({
                       ...block,
@@ -342,7 +342,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="100%, 500px, etc."
-                  value={props.subheadingWidth || "100%"}
+                  value={props.subheadingWidth ?? "100%"}
                   onChange={(e) =>
                     onBlockUpdate({
                       ...block,
@@ -359,7 +359,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="auto, 100px, etc."
-                  value={props.subheadingHeight || "auto"}
+                  value={props.subheadingHeight ?? "auto"}
                   onChange={(e) =>
                     onBlockUpdate({
                       ...block,
