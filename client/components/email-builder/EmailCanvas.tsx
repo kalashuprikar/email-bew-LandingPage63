@@ -144,9 +144,12 @@ export const EmailCanvas: React.FC<EmailCanvasProps> = ({
         {/* Blocks Canvas */}
         <div
           ref={drop}
+          style={{
+            backgroundColor: template.documentBackgroundColor || "#ffffff",
+          }}
           className={cn(
-            "bg-gray-50 border border-t-0 border-gray-200 rounded-b-lg shadow-sm min-h-96 transition-all p-4",
-            isOver && "ring-2 ring-valasys-orange bg-orange-50",
+            "border border-t-0 border-gray-200 rounded-b-lg shadow-sm min-h-96 transition-all p-4",
+            isOver && "ring-2 ring-valasys-orange",
           )}
           onClick={(e) => {
             // Only deselect inline group if clicking on empty canvas area
