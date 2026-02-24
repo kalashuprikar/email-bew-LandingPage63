@@ -127,7 +127,7 @@ export default function TrialBanner(props: TrialBannerProps) {
           ? "from-indigo-600 to-purple-600"
           : "from-valasys-orange to-valasys-orange-light",
         "text-white",
-        "px-4 lg:px-6",
+        "px-4 lg:px-6 py-2",
         "text-sm",
         props.className,
       )}

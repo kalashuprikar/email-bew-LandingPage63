@@ -603,7 +603,7 @@ export const CenteredImageCardBlockComponent: React.FC<
           )}
         </div>
 
-        <div className="space-y-4 text-center">
+        <div className="space-y-4 text-center pt-4">
           {/* Titles Section */}
           {titles.filter((t) => t.content).length > 0 && (
             <div className="space-y-2">
@@ -645,7 +645,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                             setEditMode(`title-${title.id}`);
                             setFocusedSection(`title-${title.id}`);
                           }}
-                          className="flex-1 font-bold text-xl text-gray-900 cursor-pointer transition-all rounded"
+                          className="flex-1 font-bold text-xl text-gray-900 cursor-pointer transition-all p-3 rounded"
                           style={{
                             border:
                               focusedSection === `title-${title.id}`
@@ -724,7 +724,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                             setEditMode(`description-${desc.id}`);
                             setFocusedSection(`description-${desc.id}`);
                           }}
-                          className="flex-1 text-sm text-gray-600 cursor-pointer transition-all rounded whitespace-pre-wrap break-words"
+                          className="flex-1 text-sm text-gray-600 cursor-pointer transition-all p-3 rounded whitespace-pre-wrap break-words"
                           style={{
                             border:
                               focusedSection === `description-${desc.id}`

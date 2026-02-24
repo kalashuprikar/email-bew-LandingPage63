@@ -436,8 +436,8 @@ export function createCenteredImageCardBlock(): CenteredImageCardBlock {
     borderColor: "#e0e0e0",
     borderWidth: 1,
     borderRadius: 8,
-    padding: 0,
-    margin: 0,
+    padding: 20,
+    margin: 16,
     visibility: "all",
   };
 }
