@@ -454,6 +454,15 @@ export interface CenteredImageCardBlock {
   borderRadius: number;
   padding: number;
   margin: number;
+  // Sub-element padding/margin
+  imagePadding?: number;
+  imageMargin?: number;
+  titlePadding?: number;
+  titleMargin?: number;
+  descriptionPadding?: number;
+  descriptionMargin?: number;
+  buttonPadding?: number;
+  buttonMargin?: number;
   visibility: "all" | "desktop" | "mobile";
   width?: number;
   height?: number;
@@ -482,6 +491,15 @@ export interface SplitImageCardBlock {
   borderRadius: number;
   padding: number;
   margin: number;
+  // Sub-element padding/margin
+  imagePadding?: number;
+  imageMargin?: number;
+  titlePadding?: number;
+  titleMargin?: number;
+  descriptionPadding?: number;
+  descriptionMargin?: number;
+  buttonPadding?: number;
+  buttonMargin?: number;
   visibility: "all" | "desktop" | "mobile";
 }
 

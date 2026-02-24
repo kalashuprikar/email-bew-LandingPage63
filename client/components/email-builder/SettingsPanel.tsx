@@ -112,10 +112,27 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
       setPaddingLeft(value);
       onBlockUpdate({ ...block, padding: value });
     } else if (side) {
-      if (side === "top") setPaddingTop(value);
-      if (side === "right") setPaddingRight(value);
-      if (side === "bottom") setPaddingBottom(value);
-      if (side === "left") setPaddingLeft(value);
+      // Update local state
+      const sideStateMap = {
+        top: () => setPaddingTop(value),
+        right: () => setPaddingRight(value),
+        bottom: () => setPaddingBottom(value),
+        left: () => setPaddingLeft(value),
+      };
+      sideStateMap[side]();
+
+      // Persist the per-side value to the block
+      const sidePropertyMap = {
+        top: "paddingTop",
+        right: "paddingRight",
+        bottom: "paddingBottom",
+        left: "paddingLeft",
+      };
+      const updatedBlock = {
+        ...block,
+        [sidePropertyMap[side]]: value,
+      };
+      onBlockUpdate(updatedBlock);
     }
   };
 
@@ -131,10 +148,27 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
       setMarginLeft(value);
       onBlockUpdate({ ...block, margin: value });
     } else if (side) {
-      if (side === "top") setMarginTop(value);
-      if (side === "right") setMarginRight(value);
-      if (side === "bottom") setMarginBottom(value);
-      if (side === "left") setMarginLeft(value);
+      // Update local state
+      const sideStateMap = {
+        top: () => setMarginTop(value),
+        right: () => setMarginRight(value),
+        bottom: () => setMarginBottom(value),
+        left: () => setMarginLeft(value),
+      };
+      sideStateMap[side]();
+
+      // Persist the per-side value to the block
+      const sidePropertyMap = {
+        top: "marginTop",
+        right: "marginRight",
+        bottom: "marginBottom",
+        left: "marginLeft",
+      };
+      const updatedBlock = {
+        ...block,
+        [sidePropertyMap[side]]: value,
+      };
+      onBlockUpdate(updatedBlock);
     }
   };
 
@@ -7133,6 +7167,24 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
 
                 <div>
                   <Label className="text-xs text-gray-700 mb-1 block">
+                    Padding (px)
+                  </Label>
+                  <Input
+                    type="number"
+                    min="0"
+                    value={(block as any).padding || 0}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        padding: parseInt(e.target.value) || 0,
+                      })
+                    }
+                    className="focus:ring-valasys-orange focus:ring-2"
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
                     Margin (px)
                   </Label>
                   <Input
@@ -7147,6 +7199,161 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     }
                     className="focus:ring-valasys-orange focus:ring-2"
                   />
+                </div>
+
+                <div className="pt-3 border-t border-gray-200">
+                  <Label className="text-xs font-semibold text-gray-700 mb-3 block">
+                    Element Spacing
+                  </Label>
+                  <div className="space-y-3">
+                    {/* Image Spacing */}
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Image Padding (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).imagePadding || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            imagePadding: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Image Margin (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).imageMargin || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            imageMargin: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    {/* Title Spacing */}
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Title Padding (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).titlePadding || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            titlePadding: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Title Margin (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).titleMargin || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            titleMargin: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    {/* Description Spacing */}
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Description Padding (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).descriptionPadding || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            descriptionPadding: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Description Margin (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).descriptionMargin || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            descriptionMargin: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    {/* Button Spacing */}
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Button Padding (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).buttonPadding || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            buttonPadding: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+
+                    <div>
+                      <Label className="text-xs text-gray-600 mb-1 block">
+                        Button Margin (px)
+                      </Label>
+                      <Input
+                        type="number"
+                        min="0"
+                        value={(block as any).buttonMargin || 0}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            buttonMargin: parseInt(e.target.value) || 0,
+                          })
+                        }
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

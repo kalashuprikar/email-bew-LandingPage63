@@ -460,6 +460,10 @@ export const SplitImageCardBlockComponent: React.FC<
               ref={imageContainerRef}
               onMouseEnter={() => block.image && setIsHoveringImage(true)}
               onMouseLeave={() => setIsHoveringImage(false)}
+              style={{
+                padding: block.imagePadding ? `${block.imagePadding}px` : undefined,
+                margin: block.imageMargin ? `${block.imageMargin}px` : undefined,
+              }}
             >
               {block.image ? (
                 <div className="relative group">
@@ -587,7 +591,10 @@ export const SplitImageCardBlockComponent: React.FC<
             <div className="space-y-4 p-4">
               {/* Titles Section */}
               {titles.filter((t) => t.content).length > 0 && (
-                <div className="space-y-2">
+                <div className="space-y-2" style={{
+                  padding: block.titlePadding ? `${block.titlePadding}px` : undefined,
+                  margin: block.titleMargin ? `${block.titleMargin}px` : undefined,
+                }}>
                   {titles
                     .filter((t) => t.content)
                     .map((title, idx) => (
@@ -656,7 +663,10 @@ export const SplitImageCardBlockComponent: React.FC<
 
               {/* Descriptions Section */}
               {descriptions.filter((d) => d.content).length > 0 && (
-                <div className="space-y-2">
+                <div className="space-y-2" style={{
+                  padding: block.descriptionPadding ? `${block.descriptionPadding}px` : undefined,
+                  margin: block.descriptionMargin ? `${block.descriptionMargin}px` : undefined,
+                }}>
                   {descriptions
                     .filter((d) => d.content)
                     .map((desc, idx) => (
@@ -736,7 +746,10 @@ export const SplitImageCardBlockComponent: React.FC<
 
               {/* Buttons Section */}
               {buttons.filter((b) => b.text).length > 0 && (
-                <div className="space-y-2">
+                <div className="space-y-2" style={{
+                  padding: block.buttonPadding ? `${block.buttonPadding}px` : undefined,
+                  margin: block.buttonMargin ? `${block.buttonMargin}px` : undefined,
+                }}>
                   {buttons
                     .filter((b) => b.text)
                     .map((btn, idx) => (
