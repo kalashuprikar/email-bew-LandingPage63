@@ -803,14 +803,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         )}
       >
         {/* Top Header */}
-        <header className="bg-white shadow-sm border-b border-valasys-gray-200 sticky top-0 z-40 pt-2 sm:pt-4 lg:pt-10">
+        <header className="bg-white shadow-sm border-b border-valasys-gray-200 sticky top-0 z-40">
           <TrialBanner
             className="fixed inset-x-0 top-0 z-[60]"
             daysUsed={5}
             totalDays={10}
             endAt={new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)}
           />
-          <div className="px-4 lg:px-6 py-4 relative">
+          <div className="px-4 lg:px-6 relative">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 {/* Mobile Menu Button */}
