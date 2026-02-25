@@ -340,6 +340,7 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                   {/* Tab Switcher */}
                   <div className="flex border-b border-gray-200">
                     <button
+                      type="button"
                       onClick={() => setLeftSidebarTab("blocks")}
                       className={cn(
                         "flex-1 py-3 text-sm font-medium flex items-center justify-center gap-2 transition-colors",
@@ -352,6 +353,7 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
                       Blocks
                     </button>
                     <button
+                      type="button"
                       onClick={() => setLeftSidebarTab("ai")}
                       className={cn(
                         "flex-1 py-3 text-sm font-medium flex items-center justify-center gap-2 transition-colors",

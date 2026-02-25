@@ -83,6 +83,7 @@ const DraggableBlockButton: React.FC<DraggableBlockProps> = ({ block }) => {
 
   return (
     <button
+      type="button"
       ref={drag}
       className={`flex flex-col items-center justify-center p-6 rounded-lg border border-gray-200 hover:border-valasys-orange hover:bg-orange-50 transition-all hover:shadow-md cursor-move ${
         isDragging ? "opacity-50 scale-95" : ""
@@ -170,6 +171,7 @@ const DraggableTemplateCard: React.FC<DraggableTemplateProps> = ({
           {template.description}
         </p>
         <button
+          type="button"
           onClick={handleClick}
           className="w-full px-3 py-2 bg-valasys-orange text-white text-xs font-medium rounded hover:bg-orange-600 transition-colors"
         >
@@ -361,6 +363,7 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
             className="border-b border-gray-200 last:border-b-0"
           >
             <button
+              type="button"
               onClick={() => toggleSection(section.title)}
               className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
             >

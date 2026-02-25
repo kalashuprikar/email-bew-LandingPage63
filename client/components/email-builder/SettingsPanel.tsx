@@ -294,7 +294,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       <option value="px">px</option>
                     </select>
                   </div>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs mt-2"
@@ -319,7 +319,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -331,7 +331,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -343,7 +343,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -617,7 +617,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       }
                     }}
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs"
@@ -815,7 +815,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -823,7 +823,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -835,7 +835,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -907,7 +907,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       <option value="px">px</option>
                     </select>
                   </div>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs mt-2"
@@ -928,7 +928,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -940,7 +940,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -952,7 +952,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -1226,7 +1226,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       }
                     }}
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs"
@@ -1427,7 +1427,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -1435,7 +1435,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -1447,7 +1447,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -1490,7 +1490,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       }
                     }}
                   />
-                  <Button
+                  <Button type="button"
                     variant="link"
                     size="sm"
                     className="text-xs h-auto p-0 text-valasys-orange"
@@ -1500,7 +1500,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   >
                     Upload
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="link"
                     size="sm"
                     className="text-xs h-auto p-0 text-valasys-orange"
@@ -1592,7 +1592,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   }
                   className="flex-1 focus:ring-valasys-orange focus:ring-2"
                 />
-                <Button
+                <Button type="button"
                   variant="outline"
                   size="sm"
                   className="px-2"
@@ -1624,7 +1624,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   }
                   className="flex-1 focus:ring-valasys-orange focus:ring-2"
                 />
-                <Button variant="outline" size="sm" className="px-2">
+                <Button type="button" variant="outline" size="sm" className="px-2">
                   ⓘ
                 </Button>
               </div>
@@ -1690,7 +1690,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   />
                 </div>
 
-                <Button
+                <Button type="button"
                   variant="link"
                   size="sm"
                   className="text-xs h-auto p-0 text-valasys-orange"
@@ -1748,7 +1748,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       <option value="px">px</option>
                     </select>
                   </div>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs mt-2"
@@ -1811,7 +1811,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -1823,7 +1823,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -1835,7 +1835,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -2163,7 +2163,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 specific conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -2171,7 +2171,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -2183,7 +2183,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -2296,7 +2296,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     className="focus:ring-valasys-orange focus:ring-2"
                   />
                 </div>
-                <button
+                <button type="button"
                   className="text-xs text-valasys-orange font-semibold hover:text-valasys-orange"
                   onClick={() =>
                     onBlockUpdate({
@@ -2355,7 +2355,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       <option value="%">%</option>
                     </select>
                   </div>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs mt-2"
@@ -2378,7 +2378,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -2390,7 +2390,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -2402,7 +2402,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -2743,7 +2743,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -2751,7 +2751,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -2763,7 +2763,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -2838,7 +2838,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                         "2px solid red";
                     }}
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => onBlockUpdate({ ...headerBlock, logo: "" })}
@@ -3011,7 +3011,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       }}
                       className="flex-1"
                     />
-                    <Button
+                    <Button type="button"
                       variant="outline"
                       size="sm"
                       onClick={() => {
@@ -3025,7 +3025,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     </Button>
                   </div>
                 ))}
-                <Button
+                <Button type="button"
                   variant="outline"
                   size="sm"
                   className="w-full"
@@ -3798,7 +3798,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                         className="focus:ring-valasys-orange focus:ring-2"
                       />
                     </div>
-                    <button
+                    <button type="button"
                       className="text-xs text-valasys-orange font-semibold hover:text-valasys-orange"
                       onClick={() =>
                         onBlockUpdate({
@@ -4113,7 +4113,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       <option value="px">px</option>
                     </select>
                   </div>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs mt-2"
@@ -4215,7 +4215,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -4227,7 +4227,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -4239,7 +4239,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -4563,7 +4563,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -4571,7 +4571,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -4583,7 +4583,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -4959,7 +4959,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Width
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant="outline"
                       size="sm"
                       onClick={() =>
@@ -4988,7 +4988,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       placeholder="Enter width"
                       className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
                     />
-                    <Button
+                    <Button type="button"
                       variant="outline"
                       size="sm"
                       onClick={() =>
@@ -5332,7 +5332,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -5340,7 +5340,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -5352,7 +5352,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -5483,7 +5483,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Image Position
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.imagePosition === "left" ? "default" : "outline"
                       }
@@ -5495,7 +5495,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.imagePosition === "center" ? "default" : "outline"
                       }
@@ -5507,7 +5507,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.imagePosition === "right" ? "default" : "outline"
                       }
@@ -5527,7 +5527,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     Block Alignment
                   </Label>
                   <div className="flex gap-2">
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "left" ? "default" : "outline"
                       }
@@ -5539,7 +5539,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬅
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "center" ? "default" : "outline"
                       }
@@ -5551,7 +5551,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       ⬇
                     </Button>
-                    <Button
+                    <Button type="button"
                       variant={
                         block.alignment === "right" ? "default" : "outline"
                       }
@@ -5875,7 +5875,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 conditions
               </p>
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button type="button"
                   variant={block.visibility === "all" ? "default" : "outline"}
                   size="sm"
                   onClick={() => onBlockUpdate({ ...block, visibility: "all" })}
@@ -5883,7 +5883,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   All devices
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "desktop" ? "default" : "outline"
                   }
@@ -5895,7 +5895,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 >
                   Only on desktop
                 </Button>
-                <Button
+                <Button type="button"
                   variant={
                     block.visibility === "mobile" ? "default" : "outline"
                   }
@@ -6078,7 +6078,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </Label>
               <div className="grid grid-cols-2 gap-2 mb-4">
                 {twoColBlock.cards?.map((card: any, index: number) => (
-                  <button
+                  <button type="button"
                     key={card.id}
                     onClick={() => setSelectedCardId(card.id)}
                     className={`px-3 py-2 rounded text-xs font-medium transition-all ${
@@ -6092,7 +6092,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 ))}
               </div>
               <div className="flex gap-2 mb-4">
-                <Button
+                <Button type="button"
                   onClick={handleAddCard}
                   size="sm"
                   variant="outline"
@@ -6103,7 +6103,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 </Button>
                 {twoColBlock.cards?.length > 1 && (
                   <>
-                    <Button
+                    <Button type="button"
                       onClick={handleDuplicateCard}
                       size="sm"
                       variant="outline"
@@ -6112,7 +6112,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     >
                       <Copy className="w-3 h-3" />
                     </Button>
-                    <Button
+                    <Button type="button"
                       onClick={handleDeleteCard}
                       size="sm"
                       variant="outline"
@@ -6458,7 +6458,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                           }}
                         />
                       </div>
-                      <button
+                      <button type="button"
                         onClick={() => {
                           // Batch all updates into a single state update
                           const updatedCards = twoColBlock.cards.map(
@@ -6781,7 +6781,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </Label>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {statsBlock.stats?.map((stat: any, index: number) => (
-                  <button
+                  <button type="button"
                     key={stat.id}
                     onClick={() => setSelectedStatId(stat.id)}
                     className={`px-3 py-2 rounded text-xs font-medium transition-all ${
@@ -6967,7 +6967,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       }
                     }}
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     className="w-full text-xs"
@@ -7241,7 +7241,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </Label>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {featuresBlock.features?.map((feature: any, index: number) => (
-                  <button
+                  <button type="button"
                     key={feature.id}
                     onClick={() => setSelectedFeatureId(feature.id)}
                     className={`px-3 py-2 rounded text-xs font-medium transition-all ${
@@ -7656,7 +7656,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     <div className="bg-white border-l border-gray-200 p-5 h-full overflow-y-auto">
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
         <h3 className="font-semibold text-gray-900 text-base">Style</h3>
-        <Button
+        <Button type="button"
           variant="outline"
           size="sm"
           onClick={onBlockDelete}

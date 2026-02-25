@@ -360,7 +360,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onKeyDown={(e) => handleSizeKeyDown(e, "width", props.width ?? "100%")}
                     className="focus:ring-valasys-orange focus:ring-2 flex-1"
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => toggleUnit("width", props.width ?? "100%")}
@@ -368,7 +368,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   >
                     {(props.width ?? "100%").includes("%") ? "px" : "%"}
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() =>
@@ -401,7 +401,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onKeyDown={(e) => handleSizeKeyDown(e, "height", props.height ?? "auto")}
                     className="focus:ring-valasys-orange focus:ring-2 flex-1"
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => {
@@ -419,7 +419,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   >
                     {(props.height ?? "auto") === "auto" ? "px/%" : (props.height ?? "auto").includes("%") ? "px" : "%"}
                   </Button>
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() =>
@@ -452,7 +452,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onKeyDown={(e) => handleSizeKeyDown(e, "minHeight", props.minHeight || "500px")}
                     className="focus:ring-valasys-orange focus:ring-2 flex-1"
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() =>
@@ -488,7 +488,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onKeyDown={(e) => handleSizeKeyDown(e, "headlineWidth", props.headlineWidth ?? "100%")}
                     className="focus:ring-valasys-orange focus:ring-2 flex-1"
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => toggleUnit("headlineWidth", props.headlineWidth ?? "100%")}
@@ -516,7 +516,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     onKeyDown={(e) => handleSizeKeyDown(e, "headlineHeight", props.headlineHeight ?? "auto")}
                     className="focus:ring-valasys-orange focus:ring-2 flex-1"
                   />
-                  <Button
+                  <Button type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => {
@@ -945,7 +945,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
         <h3 className="font-semibold text-gray-900 text-sm capitalize">
           {block.type.replace("-", " ")}
         </h3>
-        <Button
+        <Button type="button"
           size="sm"
           variant="ghost"
           className="h-8 w-8 p-0 hover:bg-red-50 hover:text-red-600"

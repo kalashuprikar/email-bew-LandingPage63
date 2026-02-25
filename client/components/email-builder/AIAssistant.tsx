@@ -211,7 +211,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   {message.id === "welcome" && (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {quickBuilds.map((build) => (
-                        <Button
+                        <Button type="button"
                           key={build}
                           variant="outline"
                           size="sm"
@@ -240,7 +240,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                   <div className="bg-purple-50 border border-purple-100 rounded-xl p-3">
                     <div className="text-xs font-semibold text-purple-700 mb-3 flex items-center justify-between">
                       AI GENERATED BLOCKS
-                      <Button 
+                      <Button type="button" 
                         variant="ghost" 
                         size="sm" 
                         className="h-6 text-[10px] hover:bg-purple-100 text-purple-700"
@@ -264,7 +264,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
                               {"content" in block ? block.content : block.type}
                             </span>
                           </div>
-                          <Button
+                          <Button type="button"
                             variant="ghost"
                             size="sm"
                             className="h-7 w-7 p-0 opacity-0 group-hover:opacity-100 text-purple-600 hover:text-purple-700 hover:bg-purple-50"
@@ -307,7 +307,7 @@ export const AIAssistant: React.FC<AIAssistantProps> = ({
             className="pr-10 border-purple-100 focus:border-purple-600 focus:ring-purple-600/10 rounded-xl"
             disabled={isGenerating}
           />
-          <Button
+          <Button type="button"
             size="sm"
             variant="ghost"
             onClick={() => handleSend()}

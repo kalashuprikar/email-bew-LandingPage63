@@ -268,7 +268,7 @@ const DragItem: React.FC<{
       {(isSelected || isHovered) && (
         <>
           <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex gap-1 bg-white rounded-lg shadow-xl border border-valasys-orange p-3 z-[100]">
-          <Button
+          <Button type="button"
             size="sm"
             variant="ghost"
             className="h-9 w-9 p-0 hover:bg-orange-50 hover:text-valasys-orange transition-colors"
@@ -285,7 +285,7 @@ const DragItem: React.FC<{
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
+              <Button type="button"
                 size="sm"
                 variant="ghost"
                 className="h-9 w-9 p-0 hover:bg-orange-50 hover:text-valasys-orange transition-colors"
@@ -363,7 +363,7 @@ const DragItem: React.FC<{
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button
+          <Button type="button"
             size="sm"
             variant="ghost"
             className="h-9 w-9 p-0 hover:bg-red-50 hover:text-red-600 transition-colors"

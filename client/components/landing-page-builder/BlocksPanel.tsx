@@ -77,6 +77,7 @@ const DraggableBlockButton: React.FC<{
 
   return (
     <button
+      type="button"
       ref={ref}
       onClick={() => onAddBlock(block.onCreate())}
       className={`flex flex-col items-center justify-center p-4 rounded-lg border transition-all cursor-move ${
@@ -264,6 +265,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({
           <div key={section.id} className="border-b border-gray-100 last:border-0">
             {/* Section Header */}
             <button
+              type="button"
               onClick={() => toggleSection(section.id)}
               className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
             >

@@ -23,7 +23,7 @@ export const SpacingSettings: React.FC<SpacingSettingsProps> = ({
   onChange,
   tooltip,
 }) => {
-  const [isGrouped, setIsGrouped] = React.useState(true);
+  const [isGrouped, setIsGrouped] = React.useState(false);
 
   const handleChange = (side: keyof typeof values, value: number) => {
     if (isGrouped) {
@@ -86,13 +86,15 @@ export const SpacingSettings: React.FC<SpacingSettingsProps> = ({
             <span className="text-[10px] text-gray-400 ml-1">px</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("top", values.top + 1)}
               className="text-gray-400 hover:text-gray-600"
             >
               <svg width="6" height="4" viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("top", Math.max(0, values.top - 1))}
               className="text-gray-400 hover:text-gray-600"
             >
@@ -114,13 +116,15 @@ export const SpacingSettings: React.FC<SpacingSettingsProps> = ({
             <span className="text-[10px] text-gray-400 ml-1">px</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("bottom", values.bottom + 1)}
               className="text-gray-400 hover:text-gray-600"
             >
               <svg width="6" height="4" viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("bottom", Math.max(0, values.bottom - 1))}
               className="text-gray-400 hover:text-gray-600"
             >
@@ -142,13 +146,15 @@ export const SpacingSettings: React.FC<SpacingSettingsProps> = ({
             <span className="text-[10px] text-gray-400 ml-1">px</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("left", values.left + 1)}
               className="text-gray-400 hover:text-gray-600"
             >
               <svg width="6" height="4" viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("left", Math.max(0, values.left - 1))}
               className="text-gray-400 hover:text-gray-600"
             >
@@ -170,13 +176,15 @@ export const SpacingSettings: React.FC<SpacingSettingsProps> = ({
             <span className="text-[10px] text-gray-400 ml-1">px</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("right", values.right + 1)}
               className="text-gray-400 hover:text-gray-600"
             >
               <svg width="6" height="4" viewBox="0 0 6 4" fill="none"><path d="M1 3L3 1L5 3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
-            <button 
+            <button
+              type="button"
               onClick={() => handleChange("right", Math.max(0, values.right - 1))}
               className="text-gray-400 hover:text-gray-600"
             >
