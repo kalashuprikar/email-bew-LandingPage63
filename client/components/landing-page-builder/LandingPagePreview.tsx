@@ -12,6 +12,7 @@ import {
   FooterBlockPreview,
   SpacerBlockPreview,
   PricingBlockPreview,
+  PricingFooterBlockPreview,
   FaqBlockPreview,
   SignupBlockPreview,
   SelectionProvider,

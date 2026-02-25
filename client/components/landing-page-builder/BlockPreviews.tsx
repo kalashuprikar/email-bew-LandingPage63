@@ -1051,6 +1051,7 @@ export const TestimonialsBlockPreview: React.FC<BlockPreviewProps> = ({
   block,
   isSelected,
   onSelect,
+  onUpdate,
 }) => {
   const props = block.properties;
   return (
@@ -1132,6 +1133,7 @@ export const AboutBlockPreview: React.FC<BlockPreviewProps> = ({
   block,
   isSelected,
   onSelect,
+  onUpdate,
 }) => {
   const props = block.properties;
   return (
@@ -1203,6 +1205,7 @@ export const ContactFormBlockPreview: React.FC<BlockPreviewProps> = ({
   block,
   isSelected,
   onSelect,
+  onUpdate,
 }) => {
   const props = block.properties;
   return (
@@ -1380,6 +1383,7 @@ export const SpacerBlockPreview: React.FC<BlockPreviewProps> = ({
   block,
   isSelected,
   onSelect,
+  onUpdate,
 }) => {
   const props = block.properties;
   return (
@@ -1399,6 +1403,7 @@ export const PricingBlockPreview: React.FC<BlockPreviewProps> = ({
   block,
   isSelected,
   onSelect,
+  onUpdate,
 }) => {
   const props = block.properties;
   return (

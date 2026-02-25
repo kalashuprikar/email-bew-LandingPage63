@@ -410,6 +410,41 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [linkType, setLinkType] = useState("url");
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
   const [selectedStatId, setSelectedStatId] = useState<string | null>(null);
+  const [selectedFeatureId, setSelectedFeatureId] = useState<string | null>(null);
+
+  // Helper to find and update sub-elements in complex blocks
+  const getSelectedSubElement = () => {
+    if (!block || !selectedSubElementId) return null;
+
+    if (block.type === "centeredImageCard" || block.type === "splitImageCard") {
+      const b = block as any;
+      return (
+        b.titles?.find((t: any) => t.id === selectedSubElementId) ||
+        b.descriptions?.find((d: any) => d.id === selectedSubElementId) ||
+        b.buttons?.find((btn: any) => btn.id === selectedSubElementId)
+      );
+    }
+
+    if (block.type === "twoColumnCard") {
+      const b = block as any;
+      return b.cards?.find((c: any) => c.id === selectedSubElementId);
+    }
+
+    if (block.type === "features") {
+      const b = block as any;
+      return b.features?.find((f: any) => f.id === selectedSubElementId);
+    }
+
+    if (block.type === "stats") {
+      const b = block as any;
+      return b.stats?.find((s: any) => s.id === selectedSubElementId);
+    }
+
+    return null;
+  };
+
+  const selectedSubElement = getSelectedSubElement();
+
   const paddingValue = selectedSubElement
     ? (selectedSubElement.styles?.padding ?? 0)
     : "padding" in (block || {}) ? ((block as any).padding ?? 0) : 0;
@@ -459,42 +494,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     setMarginBottom(getEffectiveMargin("bottom"));
     setMarginLeft(getEffectiveMargin("left"));
   }, [block?.id, selectedSubElementId]);
-  const [selectedFeatureId, setSelectedFeatureId] = useState<string | null>(
-    null,
-  );
-
-  // Helper to find and update sub-elements in complex blocks
-  const getSelectedSubElement = () => {
-    if (!block || !selectedSubElementId) return null;
-
-    if (block.type === "centeredImageCard" || block.type === "splitImageCard") {
-      const b = block as any;
-      return (
-        b.titles?.find((t: any) => t.id === selectedSubElementId) ||
-        b.descriptions?.find((d: any) => d.id === selectedSubElementId) ||
-        b.buttons?.find((btn: any) => btn.id === selectedSubElementId)
-      );
-    }
-
-    if (block.type === "twoColumnCard") {
-      const b = block as any;
-      return b.cards?.find((c: any) => c.id === selectedSubElementId);
-    }
-
-    if (block.type === "features") {
-      const b = block as any;
-      return b.features?.find((f: any) => f.id === selectedSubElementId);
-    }
-
-    if (block.type === "stats") {
-      const b = block as any;
-      return b.stats?.find((s: any) => s.id === selectedSubElementId);
-    }
-
-    return null;
-  };
-
-  const selectedSubElement = getSelectedSubElement();
 
   const handleSubElementStyleUpdate = (styleUpdate: any) => {
     if (!block || !selectedSubElementId || !selectedSubElement) return;
