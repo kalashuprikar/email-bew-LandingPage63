@@ -532,7 +532,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="blocks" className="flex flex-col m-0">
+        <TabsContent value="blocks" className="flex flex-col m-0 overflow-y-auto">
           <div className="p-4 border-b border-gray-200 sticky top-[52px] bg-white z-20">
             <Input
               placeholder="Search blocks..."
