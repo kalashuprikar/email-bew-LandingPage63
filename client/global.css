@@ -93,6 +93,13 @@
     @apply border-border;
   }
 
+  html {
+    transform: scale(0.8);
+    transform-origin: top left;
+    width: 125%;
+    height: 125%;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
